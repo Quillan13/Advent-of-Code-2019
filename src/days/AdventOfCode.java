@@ -20,8 +20,10 @@ public class AdventOfCode {
 				day1.DayOne();
 			}
 			else if (day == 2) {
-				DayTwo day2 = new DayTwo();
-				day2.DayTwo();
+				DayTwo.DayTwo();
+			}
+			else if (day == 3) {
+				DayThree.DayThree();
 			}
 		}
 		kbd.close();

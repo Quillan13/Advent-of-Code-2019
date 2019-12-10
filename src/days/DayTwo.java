@@ -6,7 +6,7 @@ import java.nio.file.*;
 
 public class DayTwo {
 	
-	public void DayTwo() {
+	public static void DayTwo() {
 	Integer[] optcodes = null;
 	
 	//parse codes file separated by comma
