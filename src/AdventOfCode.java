@@ -1,8 +1,6 @@
-package days;
-
 import java.io.IOException;
 import java.util.*;
-
+import days.*;
 import utils.ReadFile;
 
 public class AdventOfCode {
@@ -14,7 +12,8 @@ public class AdventOfCode {
     private final static DaySeven day7 = new DaySeven();
     private final static DayEight day8 = new DayEight();
     private final static DayNine day9 = new DayNine();
-    private final static DayTen day10 = new DayTen();
+    private final static DayThirteen day13 = new DayThirteen();
+    private final static DayFourteen day14 = new DayFourteen();
 
 
 
@@ -65,9 +64,13 @@ public class AdventOfCode {
 				System.out.println("Day 9 Part 1: " + day9.solvePartOne(ReadFile.getInput("/inputs/day9.txt")) );
 				System.out.println("Day 9 Part 2: " + day9.solvePartTwo(ReadFile.getInput("/inputs/day9.txt")) );
 			}
-			else if (day == 10) {
-				System.out.println("Day 10 Part 1: " + day10.solvePartOne(ReadFile.getInput("/inputs/day10.txt")) );
-				System.out.println("Day 10 Part 2: " + day10.solvePartTwo(ReadFile.getInput("/inputs/day10.txt")) );
+			else if (day == 13) {
+				System.out.println("Day 13 Part 1: " + day13.solvePartOne(ReadFile.getInput("/inputs/day13.txt")) );
+				System.out.println("Day 13 Part 2: " + day13.solvePartTwo(ReadFile.getInput("/inputs/day13.txt")) );
+			}
+			else if (day == 14) {
+				System.out.println("Day 14 Part 1: " + day14.solvePartOne(ReadFile.getInput("/inputs/day14.txt")) );
+				System.out.println("Day 14 Part 2: " + day14.solvePartTwo(ReadFile.getInput("/inputs/day14.txt")) );
 			}
 		}
 		kbd.close();
