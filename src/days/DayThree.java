@@ -1,72 +1,78 @@
 package days;
 
-import java.awt.Point;
 import java.util.*;
+import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 
-import utils.Node;
-import utils.Path;
+import utils.Position;
 import utils.ReadFile;
 
+
 public class DayThree {
-	
-	private static String[] input = ReadFile.getString("src/inputs/day3.txt").split("\n");
-	
-	public static void DayThree() {
-     String[] dir1 = input[0].split(",");
-     String[] dir2 = input[1].split(",");
+    public String solvePartOne(String input) {
+        return solve(input, (intersections, wires) -> intersections.stream()
+                .map(i -> i.manhattanDistanceTo(0, 0))
+                .reduce(Integer::min)
+                .orElseThrow(IllegalStateException::new));
+    }
 
-     System.out.println("Day 1 Part 1: " + part1(dir1, dir2));
-     part2();
-	}
+   
+    public String solvePartTwo(String input) {
+        return solve(input, (intersections, wires) -> intersections.stream()
+                .map(i -> wires.get(0).get(i).getStep() + wires.get(1).get(i).getStep())
+                .reduce(Integer::min)
+                .orElseThrow(IllegalStateException::new));
+    }
 
-	 private static int part1(String[] dir1, String[] dir2) {
-	     Set<Point> line1 = getLine(dir1);
-	     Set<Point> line2 = getLine(dir2);
-	
-	     int min = Integer.MAX_VALUE;
-	     Set<Point> matching = line1.stream().filter(line2::contains).collect(Collectors.toSet());
-	     for(Point p : matching)
-	         min = Math.min(min, Math.abs(p.x) + Math.abs(p.y));
-	
-	     return min;
-	 }
+    private String solve(String input, BiFunction<Set<Position>, List<Map<Position, Position>>, Integer> minimumFunction) {
+        List<Map<Position, Position>> wires = ReadFile.inputLines(input, this::mapPoints).collect(Collectors.toList());
 
-	 
-	 private static Set<Point> getLine(String[] directions) {
-	     int x = 0, y = 0;
-	     Set<Point> line = new HashSet<>();
-	     for(String s : directions) {
-	         for(int i = 0; i < Integer.valueOf(s.substring(1)); i++) {
-	             switch(s.charAt(0)) {
-	                 case 'U' : line.add(new Point(x, ++y)); break;
-	                 case 'D' : line.add(new Point(x, --y)); break;
-	                 case 'L' : line.add(new Point(--x, y)); break;
-	                 case 'R' : line.add(new Point(++x, y)); break;
-	             }
-	         }
-	     }
-	     return line;
-	 }
-	 
-	 private static void part2() {
-		
-		 //setup nodes and path functions in utils
-		Path path1 = new Path();
-		Path path2 = new Path();
-		
-		//split the optcodes
-		path1.buildPath(input[0].split(","));
-		path2.buildPath(input[1].split(","));
-		
-		List<Node> inters = path1.findIntersections(path2);
-		List<Integer> dist = inters.stream().map(node -> node.length).collect(Collectors.toList());
-		dist.sort((a,b) -> { return a-b; });
-		
-		//Output Part 2
-		System.out.println("Day 2 Part 2: "+ dist.get(0));
-			
-	 }
-	 
+        Set<Position> intersections = new HashSet<>(wires.get(0).keySet());
+        intersections.retainAll(wires.get(1).keySet());
+        intersections.remove(new Position(0, 0, 0));
+
+        return String.valueOf(minimumFunction.apply(intersections, wires));
+    }
+
+    private Map<Position, Position> mapPoints(String s) {
+        String[] instructions = s.split(",");
+
+        // Must use a Map because Java's Set doesn't support get() needed for part 2
+        Map<Position, Position> positions = new HashMap<>();
+
+        Position centerPosition = new Position(0, 0, 0);
+        positions.put(centerPosition, centerPosition);
+
+        int x = 0;
+        int y = 0;
+        int step = 0;
+
+        for (String instruction : instructions) {
+            char direction = instruction.charAt(0);
+
+            for (int i = 0; i < Integer.parseInt(instruction.substring(1)); i++) {
+                switch (direction) {
+                    case 'U':
+                        y--;
+                        break;
+                    case 'D':
+                        y++;
+                        break;
+                    case 'L':
+                        x--;
+                        break;
+                    case 'R':
+                        x++;
+                        break;
+                }
+
+                step++;
+
+                Position position = new Position(x, y, step);
+                positions.put(position, position);
+            }
+        }
+
+        return positions;
+    }
 }
-

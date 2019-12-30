@@ -4,7 +4,15 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.StringReader;
 import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Stream;
+
+import org.apache.commons.io.IOUtils;
+
 
 public class ReadFile {
 	
@@ -50,6 +58,18 @@ public class ReadFile {
         }catch(Exception e) { throw new IllegalArgumentException(e); }
     }
 	
+	 public static <T> Stream<T> inputLines(
+	            String input,
+	            Function<? super String, ? extends T> mappingFunction) {
+	        return new BufferedReader(new StringReader(input)).lines().map(mappingFunction);
+	    }
+	
+	 public static String getInput(String file) throws IOException {
+	        InputStream stream = InputStreamReader.class.getResourceAsStream(file);
+	        return stream != null
+	                ? IOUtils.toString(ReadFile.class.getResourceAsStream(file),"UTF-8")
+	                : null;
+	    }
 //	//Returns String[] of input **REVISE FOR DAY 2????***
 //	public static String[] getStream(String path) {
 //		
