@@ -8,6 +8,14 @@ import utils.ReadFile;
 public class AdventOfCode {
 	
     private final static DayThree day3 = new DayThree();
+    private final static DayFour day4 = new DayFour();
+    private final static DayFive day5 = new DayFive();
+    private final static DaySix day6 = new DaySix();
+    private final static DaySeven day7 = new DaySeven();
+    private final static DayEight day8 = new DayEight();
+    private final static DayNine day9 = new DayNine();
+    private final static DayTen day10 = new DayTen();
+
 
 
 	public static void main(String[] args) throws IOException {
@@ -32,7 +40,34 @@ public class AdventOfCode {
 			else if (day == 3) {
 				System.out.println("Day 3 Part 1: " + day3.solvePartOne(ReadFile.getInput("/inputs/day3.txt")) );
 				System.out.println("Day 3 Part 2: " + day3.solvePartTwo(ReadFile.getInput("/inputs/day3.txt")) );
-
+			}
+			else if (day == 4) {
+				System.out.println("Day 4 Part 1: " + day4.solvePartOne(ReadFile.getInput("/inputs/day4.txt")) );
+				System.out.println("Day 4 Part 2: " + day4.solvePartTwo(ReadFile.getInput("/inputs/day4.txt")) );
+			}
+			else if (day == 5) {
+				System.out.println("Day 5 Part 1: " + day5.solvePartOne(ReadFile.getInput("/inputs/day5.txt")) );
+				System.out.println("Day 5 Part 2: " + day5.solvePartTwo(ReadFile.getInput("/inputs/day5.txt")) );
+			}
+			else if (day == 6) {
+				System.out.println("Day 6 Part 1: " + day6.solvePartOne(ReadFile.getInput("/inputs/day6.txt")) );
+				System.out.println("Day 6 Part 2: " + day6.solvePartTwo(ReadFile.getInput("/inputs/day6.txt")) );
+			}
+			else if (day == 7) {
+				System.out.println("Day 7 Part 1: " + day7.solvePartOne(ReadFile.getInput("/inputs/day7.txt")) );
+				System.out.println("Day 7 Part 2: " + day7.solvePartTwo(ReadFile.getInput("/inputs/day7.txt")) );
+			}
+			else if (day == 8) {
+				System.out.println("Day 8 Part 1: " + day8.solvePartOne(ReadFile.getInput("/inputs/day8.txt")) );
+				System.out.println("Day 8 Part 2: \n" + day8.solvePartTwo(ReadFile.getInput("/inputs/day8.txt")) );
+			}
+			else if (day == 9) {
+				System.out.println("Day 9 Part 1: " + day9.solvePartOne(ReadFile.getInput("/inputs/day9.txt")) );
+				System.out.println("Day 9 Part 2: " + day9.solvePartTwo(ReadFile.getInput("/inputs/day9.txt")) );
+			}
+			else if (day == 10) {
+				System.out.println("Day 10 Part 1: " + day10.solvePartOne(ReadFile.getInput("/inputs/day10.txt")) );
+				System.out.println("Day 10 Part 2: " + day10.solvePartTwo(ReadFile.getInput("/inputs/day10.txt")) );
 			}
 		}
 		kbd.close();
